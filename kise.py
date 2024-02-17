@@ -115,16 +115,16 @@ def dec_handler(args):
     k = Kise()
     k.decrypt_file(args.src_file, args.dst_file)
 
-def edit_handler(k, args):
+def edit_handler(args):
     k = Kise()
     with tempfile.NamedTemporaryFile(delete=True) as tmp:
 
-        k.decrypt(args.src_file, tmp.name)
+        k.decrypt_file(args.src_file, tmp.name)
 
         proc = subprocess.Popen(['vim', tmp.name], close_fds=True)
         proc.communicate()
 
-        k.encrypt(tmp.name, args.src_file)
+        k.encrypt_file(tmp.name, args.src_file)
 
 def parse_argument():
 
